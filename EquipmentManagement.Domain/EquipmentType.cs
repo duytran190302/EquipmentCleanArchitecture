@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace EquipmentManagement.Domain
 {
-	public class EquipmentType
+	public class EquipmentType 
 	{
 		public string EquipmentTypeId { get; set; } = string.Empty;
 		public string EquipmentTypeName { get; set; } = string.Empty;

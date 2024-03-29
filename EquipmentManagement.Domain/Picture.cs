@@ -1,9 +1,15 @@
-﻿namespace EquipmentManagement.Domain
+﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace EquipmentManagement.Domain
 {
-	public class Picture
+	public class Picture 
 	{
-		public string PictureId { get; set; } = string.Empty;
+		public int PictureId { get; set; }
+		[Column(TypeName = "VARBINARY(MAX)")]
 		public byte[] FileData { get; set; }
+		public string EquipmentTypeId { get; set; }
+		public EquipmentType EquipmentType { get; set; }
 
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace EquipmentManagement.Domain
 {
 	public class Borrow
 	{
-		public string BorrowId { get; set; } = string.Empty;
+		public string BorrowId {  get; set; } = string.Empty;
 		public DateTime BorrowedDate { get; set; }
 
 		public DateTime ReturnedDate { get; set; }
@@ -20,7 +21,7 @@ namespace EquipmentManagement.Domain
 		public string Reason { get; set; } = string.Empty;
 		public bool OnSide { get; set; }
 
-		public Project Project { get; set; }
-		public List<Equipment> Equipments { get; set; }
+		public Project? Project { get; set; }
+		public List<Equipment>? Equipments { get; set; }
 	}
 }

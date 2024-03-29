@@ -1,6 +1,8 @@
-﻿namespace EquipmentManagement.Domain
+﻿
+
+namespace EquipmentManagement.Domain
 {
-	public class Project
+	public class Project 
 	{
 		public string ProjectName { get; set; } = string.Empty;
 		public DateTime StartDate { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace EquipmentManagement.Domain
+﻿
+
+namespace EquipmentManagement.Domain
 {
 	public class Location
 	{
