@@ -21,6 +21,8 @@ namespace EquipmentManagement.Domain
 		public string Reason { get; set; } = string.Empty;
 		public bool OnSide { get; set; }
 
+
+		public string ProjectName { get; set; } = string.Empty;
 		public Project? Project { get; set; }
 		public List<Equipment>? Equipments { get; set; }
 	}

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -26,16 +26,8 @@
     <Folder Include="Feature\EquipmentType\Queries\" />
     <Folder Include="Feature\Equipment\Commands\" />
     <Folder Include="Feature\Equipment\Queries\" />
-    <Folder Include="Feature\Picture\Commands\" />
-    <Folder Include="Feature\Picture\Queries\" />
     <Folder Include="Feature\Project\Commands\" />
     <Folder Include="Feature\Project\Queries\" />
-    <Folder Include="Feature\Specification\Commands\" />
-    <Folder Include="Feature\Specification\Queries\" />
-    <Folder Include="Feature\Supplier\Commands\" />
-    <Folder Include="Feature\Supplier\Queries\" />
-    <Folder Include="Feature\Tag\Commands\" />
-    <Folder Include="Feature\Tag\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EquipmentManagement.Application.Contract.Persis;
+using EquipmentManagement.Application.Contract.Persistence.Generic;
 using EquipmentManagement.Application.Exceptions;
 using MediatR;
 using System;
@@ -13,9 +14,9 @@ namespace EquipmentManagement.Application.Feature.Location.Commands.CreateLocati
 	public class CreateLocationHandler : IRequestHandler<CreateLocation, string>
 	{
 		private readonly IMapper _mapper;
-		private readonly ILocationRepository _locationRepository;
+		private readonly IUnitOfWork _locationRepository;
 
-		public CreateLocationHandler(IMapper mapper, ILocationRepository locationRepository)
+		public CreateLocationHandler(IMapper mapper, IUnitOfWork locationRepository)
         {
 			_mapper = mapper;
 			_locationRepository = locationRepository;
@@ -33,7 +34,8 @@ namespace EquipmentManagement.Application.Feature.Location.Commands.CreateLocati
 			var locationToCreate = _mapper.Map<Domain.Location>(request);
 
 			//add to db
-			await _locationRepository.CreateAsync(locationToCreate);
+			 _locationRepository.locationRepository.Add(locationToCreate);
+			await _locationRepository.SaveChangeAsync();
 			//return 
 			return locationToCreate.LocationId;
 		}

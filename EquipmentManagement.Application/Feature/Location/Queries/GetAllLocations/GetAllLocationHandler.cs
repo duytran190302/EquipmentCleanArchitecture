@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EquipmentManagement.Application.Contract.Logging;
 using EquipmentManagement.Application.Contract.Persis;
+using EquipmentManagement.Application.Contract.Persistence.Generic;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace EquipmentManagement.Application.Feature.Location.Queries.GetAllLocatio
 	public class GetAllLocationHandler : IRequestHandler<GetAllLocation, List<LocationDTO>>
 	{
 		private readonly IMapper _mapper;
-		private readonly ILocationRepository _locationRepository;
+		private readonly IUnitOfWork _locationRepository;
 		private readonly IAppLogger<GetAllLocation> _logger;
 
-		public GetAllLocationHandler(IMapper mapper, ILocationRepository locationRepository, IAppLogger<GetAllLocation> logger)
+		public GetAllLocationHandler(IMapper mapper, IUnitOfWork locationRepository, IAppLogger<GetAllLocation> logger)
         {
 			_mapper = mapper;
 			_locationRepository = locationRepository;
@@ -26,7 +27,7 @@ namespace EquipmentManagement.Application.Feature.Location.Queries.GetAllLocatio
         public async Task<List<LocationDTO>> Handle(GetAllLocation request, CancellationToken cancellationToken)
 		{
 			//query
-			var locations = await _locationRepository.GetAsync();
+			var locations =  _locationRepository.locationRepository.FindAll();
 			//logging
 			_logger.LogInformation("get location successfully");
 			// convert

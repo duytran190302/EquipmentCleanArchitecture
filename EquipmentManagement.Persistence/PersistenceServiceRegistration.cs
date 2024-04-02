@@ -1,8 +1,10 @@
 ﻿using EquipmentManagement.Application.Contract.Persis;
-using EquipmentManagement.Application.Persistence;
+using EquipmentManagement.Application.Contract.Persistence;
+using EquipmentManagement.Application.Contract.Persistence.Generic;
 using EquipmentManagement.Domain;
 using EquipmentManagement.Persistence.DatabaseContext;
 using EquipmentManagement.Persistence.Repository;
+using EquipmentManagement.Persistence.Repository.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +20,8 @@ namespace EquipmentManagement.Persistence
 				options.UseSqlServer(configuration.GetConnectionString("Fablab"));
 			});
 
-			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+			services.AddScoped(typeof(IRepositoryBaseAsync<,>), typeof(RepositoryBase<,>));
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IBorrowRepository, BorrowRepository>();
 			services.AddScoped<IEquipmentRepository, EquipmentRepository>();
 			services.AddScoped<IEquipmentTypeRepository, EquipmentTypeRepository>();

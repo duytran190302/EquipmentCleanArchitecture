@@ -21,9 +21,14 @@ namespace EquipmentManagement.API.Controllers
 			_mediator = mediator;
 		}
 		[HttpGet]
-		public async Task<IActionResult> GetLocations([FromQuery] string? search, int pageSize = 0, int pageNumber = 1)
+		public async Task<IActionResult> GetLocations([FromQuery] string? search, int pageSize = 20, int pageNumber = 1)
 		{
 			var location = await _mediator.Send(new GetAllLocation());
+			if (search != null)
+			{
+				location=location.Where(x=>x.LocationId==search).ToList();
+			}
+			location = location.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
 			return Ok(location);
 		}
 

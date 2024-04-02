@@ -34,15 +34,15 @@ namespace EquipmentManagement.Application.UnitTests.Mocks
 
 			var mockRepo = new Mock<ILocationRepository>();
 
-			mockRepo.Setup(r => r.GetAllAsync(null)).ReturnsAsync(locations);
-			mockRepo.Setup(r => r.GetAsync(null)).ReturnsAsync(locations.FirstOrDefault());
+			//mockRepo.Setup(r => r.GetAllAsync(null)).ReturnsAsync(locations);
+			//mockRepo.Setup(r => r.GetAsync(null)).ReturnsAsync(locations.FirstOrDefault());
 
-			mockRepo.Setup(r => r.CreateAsync(It.IsAny<Location>()))
-				.Returns((Location location) =>
-				{
-					locations.Add(location);
-					return Task.CompletedTask;
-				});
+			//mockRepo.Setup(r => r.CreateAsync(It.IsAny<Location>()))
+			//	.Returns((Location location) =>
+			//	{
+			//		locations.Add(location);
+			//		return Task.CompletedTask;
+			//	});
 
 
 

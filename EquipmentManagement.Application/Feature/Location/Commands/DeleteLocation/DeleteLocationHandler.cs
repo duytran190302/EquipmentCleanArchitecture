@@ -1,4 +1,5 @@
 ﻿using EquipmentManagement.Application.Contract.Persis;
+using EquipmentManagement.Application.Contract.Persistence.Generic;
 using EquipmentManagement.Application.Exceptions;
 using MediatR;
 using System;
@@ -11,9 +12,9 @@ namespace EquipmentManagement.Application.Feature.Location.Commands.DeleteLocati
 {
 	public class DeleteLocationHandler : IRequestHandler<DeleteLocation, string>
 	{
-		private readonly ILocationRepository _locationRepository;
+		private readonly IUnitOfWork _locationRepository;
 
-		public DeleteLocationHandler(ILocationRepository locationRepository)
+		public DeleteLocationHandler(IUnitOfWork locationRepository)
         {
 			_locationRepository = locationRepository;
 		}
@@ -21,13 +22,14 @@ namespace EquipmentManagement.Application.Feature.Location.Commands.DeleteLocati
 		{
 
 
-			var locationToDelete= await _locationRepository.GetAsync(x=>x.LocationId== request.LocationId);
+			var locationToDelete= await _locationRepository.locationRepository.GetByIdAsync( request.LocationId);
 			if (locationToDelete == null)
 			{
 				throw new NotFoundException(nameof(Location),request.LocationId);
 			}
 
-			await _locationRepository.DeleteAsync(locationToDelete);
+			 _locationRepository.locationRepository.Remove(locationToDelete);
+			await _locationRepository.SaveChangeAsync();
 			return locationToDelete.LocationId;
 		}
 	}

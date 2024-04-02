@@ -33,14 +33,25 @@ namespace EquipmentManagement.Persistence.DatabaseContext
 			modelBuilder.Entity<Location>().HasKey(p => p.LocationId);
 			modelBuilder.Entity<Project>().HasKey(p => p.ProjectName);
 
-			modelBuilder.Entity<EquipmentType>().HasKey(e => e.EquipmentTypeId);
-			modelBuilder.Entity<Tag>().HasKey(e => e.TagId);
-			modelBuilder.Entity<Picture>().HasKey(e => e.PictureId);
-			modelBuilder.Entity<Specification>().HasKey(e => new { e.EquipmentType, e.Name });
 
-			modelBuilder.Entity<Equipment>().HasKey(e => e.EquipmentId);
+
+			modelBuilder.Entity<Picture>().HasKey(e => e.PictureId);
+			modelBuilder.Entity<Picture>().HasOne(s => s.EquipmentType).WithMany(x => x.Pictures).HasForeignKey(s => s.EquipmentTypeId);
+			modelBuilder.Entity<Specification>().HasKey(e => e.SpecificationId);
+			modelBuilder.Entity<Specification>().HasOne(s => s.EquipmentType).WithMany(x=>x.Specifications).HasForeignKey(s => s.EquipmentTypeId);
+
+
+
 			modelBuilder.Entity<Borrow>().HasKey(p => p.BorrowId);
+			modelBuilder.Entity<Equipment>().HasKey(e => e.EquipmentId);
+			//modelBuilder.Entity<Equipment>().HasOne(x=>x.Supplier);
 			modelBuilder.Entity<Borrow>().HasMany<Equipment>(b => b.Equipments).WithMany(e => e.Borrows);
+
+			modelBuilder.Entity<Borrow>().HasOne(s => s.Project).WithMany(x=>x.Borrows).HasForeignKey(s => s.ProjectName);
+
+			modelBuilder.Entity<EquipmentType>().HasKey(e => e.EquipmentTypeId);
+			modelBuilder.Entity<EquipmentType>().HasMany<Tag>(t => t.Tags).WithMany(t => t.EquipmentTypes);
+			modelBuilder.Entity<Tag>().HasKey(e => e.TagId);
 		}
 	}
 

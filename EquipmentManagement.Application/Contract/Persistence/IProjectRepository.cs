@@ -1,8 +1,9 @@
-﻿using EquipmentManagement.Application.Persistence;
+﻿
+using EquipmentManagement.Application.Contract.Persistence.Generic;
 using EquipmentManagement.Domain;
 namespace EquipmentManagement.Application.Contract.Persis
 {
-	public interface IProjectRepository : IGenericRepository<Project>
+	public interface IProjectRepository : IRepositoryBaseAsync<Project,string>
 	{
 	}
 }

@@ -1,10 +1,11 @@
 ﻿using EquipmentManagement.Application.Contract.Persis;
 using EquipmentManagement.Domain;
 using EquipmentManagement.Persistence.DatabaseContext;
+using EquipmentManagement.Persistence.Repository.Generic;
 
 namespace EquipmentManagement.Persistence.Repository
 {
-	public class LocationRepository: GenericRepository<Location>,ILocationRepository
+	public class LocationRepository: RepositoryBase<Location,string>,ILocationRepository
 	{
 		private readonly ManageEquipmentDbContext _manageEquipmentDbContext;
 		public LocationRepository(ManageEquipmentDbContext manageEquipmentDbContext) : base(manageEquipmentDbContext)
@@ -12,12 +13,7 @@ namespace EquipmentManagement.Persistence.Repository
 			_manageEquipmentDbContext = manageEquipmentDbContext;
 		}
 
-		public async Task<Location> UpdateAsync(Location entity)
-		{
-			_manageEquipmentDbContext.Location.Update(entity);
-			await _manageEquipmentDbContext.SaveChangesAsync();
-			return entity;
-		}
+
 	}
 
 

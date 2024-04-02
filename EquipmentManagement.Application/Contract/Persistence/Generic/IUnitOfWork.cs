@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace EquipmentManagement.Application.Contract.Persistence.Generic;
 
-public interface IUnitOfWork<TContext> : IDisposable 
+public interface IUnitOfWork 
 {
-	IBorrowRepository BorrowRepository { get; }
-	IEquipmentRepository EquipmentRepository { get; }
-	ILocationRepository LocationRepository { get; }
-	IEquipmentTypeRepository EquipmentTypeRepository { get; }
-	IPictureRepository PictureRepository { get; }
-	IProjectRepository ProjectRepository { get; }
-	ISpecificationRepository SpecificationRepository { get; }
-	ISupplierRepository SupplierRepository { get; }
-	ITagRepository TagRepository { get; }
+	IBorrowRepository borrowRepository { get; }
+	IEquipmentRepository equipmentRepository { get; }
+	ILocationRepository locationRepository { get; }
+	IEquipmentTypeRepository equipmentTypeRepository { get; }
+	IPictureRepository pictureRepository { get; }
+	IProjectRepository projectRepository { get; }
+	ISpecificationRepository specificationRepository { get; }
+	ISupplierRepository supplierRepository { get; }
+	ITagRepository tagRepository { get; }
 	Task<int> CommitAsync();
 
 	Task SaveChangeAsync();
