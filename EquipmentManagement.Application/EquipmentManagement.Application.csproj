@@ -22,10 +22,6 @@
   <ItemGroup>
     <Folder Include="Feature\Borrow\Commands\" />
     <Folder Include="Feature\Borrow\Queries\" />
-    <Folder Include="Feature\EquipmentType\Commands\" />
-    <Folder Include="Feature\EquipmentType\Queries\" />
-    <Folder Include="Feature\Equipment\Commands\" />
-    <Folder Include="Feature\Equipment\Queries\" />
     <Folder Include="Feature\Project\Commands\" />
     <Folder Include="Feature\Project\Queries\" />
   </ItemGroup>
