@@ -53,7 +53,19 @@ public class NotificationHub : Hub
 		string jsonDb = JsonConvert.SerializeObject(envSend);
 		return jsonDb;
 	}
+	public string SendAllMachineData()
+	{
+		var dataSend = new List<MachineDataSend>();
+		List<TagChangedNotification> machines = _buffer.GetMachineData();
+		foreach (TagChangedNotification machine in machines)
+		{
+			var dataObjectFromBuffer = JsonConvert.DeserializeObject<MachineDataSend>(machine.TagValue.ToString());
 
+			dataSend.Add(dataObjectFromBuffer);
+		}
+		string jsonDb = JsonConvert.SerializeObject(dataSend);
+		return jsonDb;
+	}
 
 	public string SendAll()
 	{

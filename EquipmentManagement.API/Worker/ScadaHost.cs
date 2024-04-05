@@ -69,7 +69,6 @@ public class ScadaHost : BackgroundService
 		payloadMessage = payloadMessage.Replace("\\", "");
 		payloadMessage = payloadMessage.Replace("\r", "");
 		payloadMessage = payloadMessage.Replace("\n", "");
-		payloadMessage = payloadMessage.Replace(" ", "");
 		payloadMessage = payloadMessage.Replace("false", "\"FALSE\"");
 		payloadMessage = payloadMessage.Replace("true", "\"TRUE\"");
 		payloadMessage = payloadMessage.Replace("[", "");
@@ -90,9 +89,6 @@ public class ScadaHost : BackgroundService
 						var A = oee.idleTime / oee.shiftTime;
 						var P = oee.operationTime / oee.idleTime;
 
-
-
-
 						var oeeSend = new OeeSend
 						{
 							DeviceId = machineId,
@@ -111,7 +107,6 @@ public class ScadaHost : BackgroundService
 						jsonNoti = jsonNoti.Replace("\\", "");
 						jsonNoti = jsonNoti.Replace("\r", "");
 						jsonNoti = jsonNoti.Replace("\n", "");
-						jsonNoti = jsonNoti.Replace(" ", "");
 						await _hubContext.Clients.All.SendAsync("OeeChanged", jsonNoti);
 
 						break;
@@ -121,7 +116,7 @@ public class ScadaHost : BackgroundService
 					case "MachineStatus":
 					case "Operator":
 						var data = JsonConvert.DeserializeObject<TempleteObject>(payloadMessage);
-						var dataSend = new DataMachineSend
+						var dataSend = new MachineDataSend
 						{
 							machineId = topicSegments[2],
 							name = data.name,
@@ -134,9 +129,6 @@ public class ScadaHost : BackgroundService
 						_buffer.Update(dataMachineBuffer);
 						break;
 					case "MaterialCodeProducting":
-
-
-
 					case "MaterialCodeDone":
 
 						break;
@@ -162,9 +154,6 @@ public class ScadaHost : BackgroundService
 				var envirBuffer = new TagChangedNotification(topicSegments[1], topicSegments[3], jsonEnvironment);
 				_buffer.Update(envirBuffer);
 				await _hubContext.Clients.All.SendAsync("EnvironmentChanged", jsonEnvironment);
-
-
-
 				break;
 
 

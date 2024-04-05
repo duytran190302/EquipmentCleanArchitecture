@@ -1,6 +1,6 @@
 ﻿namespace EquipmentManagement.API.MQTTModels
 {
-	public class DataMachineSend
+	public class MachineDataSend
 	{
 		public string machineId { get; set; }
 		public string name { get; set; }
