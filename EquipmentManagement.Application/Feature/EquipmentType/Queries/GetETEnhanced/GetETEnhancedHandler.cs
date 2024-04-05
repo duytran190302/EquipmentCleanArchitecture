@@ -5,13 +5,13 @@ using MediatR;
 
 namespace EquipmentManagement.Application.Feature.EquipmentType.Queries.GetETEnhanced;
 
-public class GetETHandler : IRequestHandler<GetETEnhanced, List<GetETEnhancedDTO>>
+public class GetETEnhancedHandler : IRequestHandler<GetETEnhanced, List<GetETEnhancedDTO>>
 {
 	private readonly IMapper _mapper;
 	private readonly IUnitOfWork _unitOfWork;
 	private readonly IAppLogger<GetETEnhanced> _logger;
 
-	public GetETHandler(IMapper mapper, IUnitOfWork unitOfWork, IAppLogger<GetETEnhanced> logger)
+	public GetETEnhancedHandler(IMapper mapper, IUnitOfWork unitOfWork, IAppLogger<GetETEnhanced> logger)
 	{
 		_mapper = mapper;
 		_unitOfWork = unitOfWork;
@@ -24,8 +24,9 @@ public class GetETHandler : IRequestHandler<GetETEnhanced, List<GetETEnhancedDTO
 
 		var ets = _unitOfWork.equipmentTypeRepository.FindAll(
 
-			trackChanges: false,
-			includeProperties: o => new { o.Tags, o.Specifications }).ToList();
+			 false,
+			 o =>  o.Tags,
+			 o=> o.Specifications ).ToList();
 		_logger.LogInformation("get spec successfully");
 		// convert
 		if (request.equipmentTypeId!=null)
@@ -59,7 +60,7 @@ public class GetETHandler : IRequestHandler<GetETEnhanced, List<GetETEnhancedDTO
 				Description = et.Description,
 				EquipmentTypeId = et.EquipmentTypeId,
 				EquipmentTypeName = et.EquipmentTypeName,
-				Tags = et.Tags
+				Tags = et.Tags.Select(x=>x.TagId).ToList(),
 
 			};
 			data.Add(dt);

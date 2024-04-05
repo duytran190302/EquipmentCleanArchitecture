@@ -23,9 +23,9 @@ public class GetETHandler : IRequestHandler<GetET, List<GetETDTO>>
 		//query
 
 		var ets = _unitOfWork.equipmentTypeRepository.FindAll(
-			
-			trackChanges: false,
-			includeProperties: o =>new { o.Tags, o.Specifications }).ToList();
+			 false,
+			 o => o.Tags,
+			 o=> o.Specifications ).ToList();
 		_logger.LogInformation("get spec successfully");
 		// convert
 		if (request.Search!=null)
@@ -50,7 +50,7 @@ public class GetETHandler : IRequestHandler<GetET, List<GetETDTO>>
 				Description = et.Description,
 				EquipmentTypeId = et.EquipmentTypeId,
 				EquipmentTypeName = et.EquipmentTypeName,
-				Tags = et.Tags
+				Tags = et.Tags.Select(t => t.TagId).ToList(),
 
 			};
 			data.Add( dt );

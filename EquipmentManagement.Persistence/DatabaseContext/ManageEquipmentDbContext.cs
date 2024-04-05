@@ -37,7 +37,9 @@ namespace EquipmentManagement.Persistence.DatabaseContext
 
 			modelBuilder.Entity<Picture>().HasKey(e => e.PictureId);
 			modelBuilder.Entity<Picture>().HasOne(s => s.EquipmentType).WithMany(x => x.Pictures).HasForeignKey(s => s.EquipmentTypeId);
+			modelBuilder.Entity<Picture>().Property(x => x.PictureId).ValueGeneratedOnAdd();
 			modelBuilder.Entity<Specification>().HasKey(e => e.SpecificationId);
+			modelBuilder.Entity<Specification>().Property(x=>x.SpecificationId).ValueGeneratedOnAdd();
 			modelBuilder.Entity<Specification>().HasOne(s => s.EquipmentType).WithMany(x=>x.Specifications).HasForeignKey(s => s.EquipmentTypeId);
 
 

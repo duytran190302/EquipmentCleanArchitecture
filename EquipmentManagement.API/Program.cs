@@ -51,7 +51,7 @@ namespace EquipmentManagement.API
 			builder.Services.AddHostedService<ScadaHost>();
 			var app = builder.Build();
 			// check exception
-			app.UseMiddleware<ExceptionMiddleware>();
+			//app.UseMiddleware<ExceptionMiddleware>();
 
 
 			// Configure the HTTP request pipeline.

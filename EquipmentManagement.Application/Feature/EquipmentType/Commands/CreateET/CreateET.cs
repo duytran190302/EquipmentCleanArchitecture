@@ -14,7 +14,6 @@ public class CreateET : IRequest<string>
 	public string EquipmentTypeName { get; set; } = string.Empty;
 	public string Description { get; set; } = string.Empty;
 	//
-	[EnumDataType(typeof(Category))]
 	public Category Category { get; set; }
 	public List<string> Tags { get; set; }
 	public List<CreateETPicture>? Pictures {  get; set; }

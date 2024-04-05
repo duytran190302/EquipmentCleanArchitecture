@@ -29,7 +29,7 @@ public class RepositoryBase<T, Key> : RepositoryQueryBase<T, Key>,
 	}
 	public void AddRange(IEnumerable<T> entities)
 	{
-		_context.Set<T>().AddRange(entities);
+		_context.Set<T>().AddRangeAsync(entities);
 	}
 	
 	public void Remove(T entity)

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EquipmentManagement.Persistence.Migrations
 {
     [DbContext(typeof(ManageEquipmentDbContext))]
-    [Migration("20240401154142_DbInit")]
+    [Migration("20240405015146_DbInit")]
     partial class DbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

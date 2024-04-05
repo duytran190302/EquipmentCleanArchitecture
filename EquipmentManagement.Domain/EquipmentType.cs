@@ -12,7 +12,7 @@ namespace EquipmentManagement.Domain
 		[EnumDataType(typeof(Category))]
 		public Category Category { get; set; }
 
-		public List<Picture> Pictures { get; set; }
+		public List<Picture>? Pictures { get; set; }
 		public List<Tag> Tags { get; set; }
 		public List<Specification> Specifications { get; set; }
 	}

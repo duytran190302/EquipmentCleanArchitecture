@@ -11,5 +11,5 @@ public class GetETDTO
 	//
 	[EnumDataType(typeof(Category))]
 	public Category Category { get; set; }
-	public List<Domain.Tag>? Tags {  get; set; }
+	public List<string>? Tags {  get; set; }
 }

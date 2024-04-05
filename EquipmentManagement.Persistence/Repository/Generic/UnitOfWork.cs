@@ -39,9 +39,9 @@ public class UnitOfWork : IUnitOfWork
 	public ISupplierRepository supplierRepository { get; private set; }
 	public ITagRepository tagRepository { get; private set; }
 
-	public Task<int> CommitAsync()
+	public async Task<int> CommitAsync()
 	{
-		return _context.SaveChangesAsync();
+		return await _context.SaveChangesAsync();
 	}
 
 	public void Dispose()

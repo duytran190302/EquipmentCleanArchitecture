@@ -1,4 +1,5 @@
 ﻿using EquipmentManagement.Application.Feature.EquipmentType.Commands.CreateET;
+using EquipmentManagement.Application.Feature.EquipmentType.Commands.DeleteET;
 using EquipmentManagement.Application.Feature.EquipmentType.Commands.UpdateET;
 using EquipmentManagement.Application.Feature.EquipmentType.Queries.GetET;
 using EquipmentManagement.Application.Feature.EquipmentType.Queries.GetETEnhanced;
@@ -26,7 +27,7 @@ namespace EquipmentManagement.API.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetETs([FromQuery] string? search, int pageSize = 20, int pageNumber = 1)
 		{
-			var et = await _mediator.Send(new GetET{ Search=search});
+			var et = await _mediator.Send(new GetET { Search = search });
 
 			et = et.Skip(pageSize * (pageNumber - 1)).Take(pageSize).ToList();
 			return Ok(et);
@@ -34,14 +35,14 @@ namespace EquipmentManagement.API.Controllers
 		[HttpGet("Information")]
 		public async Task<IActionResult> GetETInf([FromQuery] string equipmentTypeId, int pageSize = 20, int pageNumber = 1)
 		{
-			var et = await _mediator.Send(new GETETInfor { EquipmentTypeId=equipmentTypeId });
+			var et = await _mediator.Send(new GETETInfor { EquipmentTypeId = equipmentTypeId });
 			return Ok(et);
 		}
 		[HttpGet("Enhanced")]
 		public async Task<IActionResult> GetETEnhanced(
-			[FromQuery] 
-		    string? equipmentTypeId,
-			List<string>? tagIds,
+			[FromQuery]
+			string? equipmentTypeId,
+			[FromQuery] List<string>? tagIds,
 			Category? category, 
 			string? equipmentTypeName,
 			int pageSize = 20, int pageNumber = 1)
@@ -59,7 +60,7 @@ namespace EquipmentManagement.API.Controllers
 		[HttpPost]
 		public async Task<IActionResult> PostET([FromBody] CreateET et)
 		{ 
-			var id =  _mediator.Send(et);
+			var id = await _mediator.Send(et);
 			return Ok(id);
 
 		}
@@ -73,7 +74,7 @@ namespace EquipmentManagement.API.Controllers
 		[HttpDelete]
 		public async Task<IActionResult> DeleteET([FromQuery] string id)
 		{
-			var command = new DeleteLocation { LocationId = id };
+			var command = new DeleteET { EquipmentTypeId = id };
 			var IdReturn = await _mediator.Send(command);
 			return Ok(IdReturn);
 

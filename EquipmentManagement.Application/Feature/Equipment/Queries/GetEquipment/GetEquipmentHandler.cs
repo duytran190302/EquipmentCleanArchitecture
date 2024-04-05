@@ -24,8 +24,14 @@ public class GetEquipmentHandler : IRequestHandler<GetEquipment, List<GetEquipme
 
 		var equipments = _unitOfWork.equipmentRepository.FindAll(
 
-			trackChanges: false,
-			includeProperties: o => new { o.Supplier, o.Borrows, o.Location, o.Project, o.EquipmentType}).ToList();
+			 false,
+			 o => o.Supplier,
+			 o => o.Borrows,
+			 o => o.Location, 
+			 o => o.Project, 
+			 o => o.EquipmentType,
+			 o => o.EquipmentType.Tags
+			 ).ToList();
 		_logger.LogInformation("get equipment successfully");
 		// convert
 		if (request.Search != null)
@@ -36,8 +42,8 @@ public class GetEquipmentHandler : IRequestHandler<GetEquipment, List<GetEquipme
 			x.EquipmentName.Contains(request.Search) ||
 			x.Location.LocationId.Contains(request.Search) ||
 			x.Supplier.SupplierName.Contains(request.Search) ||
-			x.Project != null && x.Project.ProjectName.Contains(request.Search) ||
-			x.Borrows != null && x.Borrows.Any(x=>x.Borrower.Contains(request.Search)) ||
+			(x.Project != null && x.Project.ProjectName.Contains(request.Search)) ||
+			(x.Borrows != null && x.Borrows.Any(x=>x.Borrower.Contains(request.Search))) ||
 			x.Status.ToString().Contains(request.Search) ||
 			x.EquipmentType.Category.ToString().Contains(request.Search) ||
 			x.EquipmentType.Tags.Any(t => t.TagId.Contains(request.Search))

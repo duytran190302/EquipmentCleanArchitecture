@@ -19,11 +19,4 @@
     <ProjectReference Include="..\EquipmentManagement.Domain\EquipmentManagement.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Feature\Borrow\Commands\" />
-    <Folder Include="Feature\Borrow\Queries\" />
-    <Folder Include="Feature\Project\Commands\" />
-    <Folder Include="Feature\Project\Queries\" />
-  </ItemGroup>
-
 </Project>
